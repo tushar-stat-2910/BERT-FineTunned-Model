@@ -1,3 +1,9 @@
+If you prepare the data for the entire dataset first and then run predictions in batches, it can improve performance because:
+
+Preprocessing Overhead: Tokenization and preparation of data (like adding attention masks, truncation, and padding) happen only once for the entire dataset, rather than repeatedly in smaller chunks during the prediction phase. This reduces the overhead of repeatedly invoking the tokenizer for every batch.
+
+Efficient Memory Usage: While predictions are made in batches (to avoid memory overflow), you still leverage the batch-based efficiency of TensorFlow/Keras without having to repeatedly tokenize the data.
+
 Key Changes:
 Preprocessing Entire Dataset: The prepare_data_entire_dataset function tokenizes the entire dataset at once, storing all tokenized input IDs and attention masks in one step.
 
