@@ -1,0 +1,10 @@
+Key Changes:
+Preprocessing Entire Dataset: The prepare_data_entire_dataset function tokenizes the entire dataset at once, storing all tokenized input IDs and attention masks in one step.
+
+Batch Prediction: The make_predictions_batch function splits the already preprocessed dataset into batches and runs predictions on each batch. By batching the predictions, memory usage is controlled while improving prediction speed.
+
+Benefits:
+Single Pass Preprocessing: The tokenization and input preparation happen only once for the entire dataset, reducing overall processing time.
+Efficient Memory Usage: Even though the data is prepared in advance, predictions are still made in batches, ensuring memory is not exhausted during the process.
+Better Performance: Since data preparation is typically slower than prediction, preparing the data for the entire dataset in one go reduces the time spent on repetitive operations.
+This method will give you the best of both worlds: fast preprocessing and efficient batch predictions. Depending on the size of your dataset and available RAM, you might need to fine-tune the batch size (64 is a good starting point).
