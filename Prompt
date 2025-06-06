@@ -1,0 +1,50 @@
+borrower_name_prompt = f"""
+(Look at the [File]: {filename}). This is the file name and is assumed to be the borrower/customer name whose information is expected in the provided document.
+
+However, some file names may be incorrect or misspelled. In such cases, your job is to find the correct customer or borrower name from the provided document content.
+
+Instructions:
+
+1. If you find that (File[:-5]) does not match the name in the document, identify the most appropriate borrower/customer name from the document.
+2. The correct name is typically a company name that includes keywords such as:
+   - Private Limited, Pvt. Ltd., Pvt Ltd, Limited, Ltd., LLP, Foundation, etc.
+   - Examples: Tushar Private Limited, Tushar Pvt. Ltd., Tushar Ltd., Tushar LLP, Tushar Foundation.
+3. Prefer such names and compare them with (File[:-5]) to decide which is more accurate.
+4. Do NOT include names that appear as part of addresses.
+5. Do NOT hallucinate or make assumptions. Only use the content actually present in the document.
+6. If no clear borrower/customer name is found in the document, return an **empty string**.
+
+<instruction>
+Strictly follow the above instructions. 
+Below is the document content you should analyze:
+</instruction>
+
+{ProvidedReport}
+
+Return only the final borrower/customer name (without any explanation). If none is found, return an empty string.
+"""
+
+
+
+
+xxxccxxccccccc
+
+borrower_name_prompt = f"""
+You are given a document and its corresponding file name. The file name is expected to contain the name of the borrower or customer, but sometimes it is incorrect or misspelled.
+
+Your task is to:
+1. Analyze the document content to find the correct borrower/customer name.
+2. The actual borrower name is usually a company name that includes terms such as: Private Limited, Pvt Ltd, Ltd, LLP, Foundation, etc.
+   - Examples: Tushar Private Limited, Tushar Pvt. Ltd., Tushar Ltd., Tushar LLP, Tushar Foundation.
+3. If the borrower name extracted from the document differs significantly from the file name (File[:-5]), return the name from the document.
+4. If no valid borrower or customer name is found in the document, return an **empty string**.
+5. Do **not** include names that are part of addresses.
+6. Do **not** guess or hallucinate. Use only the names clearly available in the document.
+
+<FileName>: {filename}
+
+<DocumentContent>:
+{ProvidedReport}
+
+Return only the final borrower/customer name or an empty string. Do not include explanation or reasoning.
+"""
